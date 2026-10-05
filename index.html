@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EBP1 Review Flashcards: Explain It</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F3F5F9; --surface:#FFFFFF; --surface-2:#EAF0FA; --text:#18202F; --muted:#556073; --border:#D5DCE8;
+  --navy:#0B2A5B; --gold:#F6CE2A; --steel:#8A96B4; --bar:#0E1E40;
+  --primary:#0B2A5B; --primary-ink:#FFFFFF; --focus:#1A5FA8; --link:#1A4FA0;
+  --c-design:#7FB8E0; --c-concept:#6FC7BB; --c-claim:#F2A59C; --c-case:#F6CE2A; --c-apply:#B7A2E6;
+  --ok:#17663D; --warn:#8A5A00; --warn-bg:#FFF1D2; --back:#FFF9E0; --back-border:#E8D67A;
+  --deck-a:#0B2A5B; --deck-b:#16407F;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1524; --surface:#152036; --surface-2:#1C2B47; --text:#E7ECF6; --muted:#A3B0C6; --border:#2B3B5B;
+    --navy:#8DB4F2; --primary:#F6CE2A; --primary-ink:#1A1400; --focus:#9CC0FF; --link:#9CC0FF;
+    --ok:#7FDBA8; --warn:#F4C86A; --warn-bg:#3A2E0B; --back:#1D2740; --back-border:#3B4C73;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1524; --surface:#152036; --surface-2:#1C2B47; --text:#E7ECF6; --muted:#A3B0C6; --border:#2B3B5B;
+  --navy:#8DB4F2; --primary:#F6CE2A; --primary-ink:#1A1400; --focus:#9CC0FF; --link:#9CC0FF;
+  --ok:#7FDBA8; --warn:#F4C86A; --warn-bg:#3A2E0B; --back:#1D2740; --back-border:#3B4C73;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit;}
+body{margin:0; background:var(--bg); color:var(--text); font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; font-size:1.0625rem; line-height:1.5;}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,"Times New Roman",serif; margin:0; line-height:1.2;}
+p{margin:0 0 .6rem;}
+button,select,input,textarea{font:inherit; color:inherit;}
+:focus-visible{outline:3px solid var(--focus); outline-offset:2px;}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+
+.bar{display:grid; grid-template-columns:18% 16% 20% 16% 30%; height:10px;}
+.bar span:nth-child(1),.bar span:nth-child(4){background:var(--bar);} .bar span:nth-child(2){background:transparent;} .bar span:nth-child(3){background:var(--steel);} .bar span:nth-child(5){background:var(--gold);}
+.wrap{max-width:1120px; margin:0 auto; padding:0 1.25rem 2.5rem;}
+header.top{padding:1rem 0 .6rem; display:flex; flex-wrap:wrap; gap:.5rem 1.5rem; align-items:flex-end; justify-content:space-between;}
+.course{color:var(--muted); font-size:.9rem;}
+h1{font-size:clamp(1.5rem,3.4vw,2rem); color:var(--navy); font-weight:700;}
+.counts{display:flex; gap:1.2rem; color:var(--muted); font-size:.95rem;} .counts b{color:var(--text); font-size:1.15rem;}
+
+details.panel{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:.7rem 1rem; margin:.6rem 0;}
+details.panel summary{cursor:pointer; font-weight:700; color:var(--navy);}
+details.panel[open] summary{margin-bottom:.6rem;}
+.how{margin:0; padding-left:1.2rem; max-width:70ch;} .how li{margin-bottom:.3rem;}
+.setup{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
+.setup fieldset{border:1px solid var(--border); border-radius:10px; padding:.6rem .8rem .8rem; margin:0;}
+.setup legend{font-weight:700; padding:0 .3rem;}
+.setup label{display:flex; align-items:center; gap:.5rem; margin:.3rem 0; cursor:pointer;}
+.setup input[type=checkbox]{width:1.15rem; height:1.15rem; accent-color:var(--navy);}
+.dot{display:inline-block; width:.8rem; height:.8rem; border-radius:50%; border:1px solid rgba(0,0,0,.25);}
+.nums{display:grid; grid-template-columns:auto 5rem; gap:.4rem .6rem; align-items:center;}
+.nums input,.setup select,.setup textarea{padding:.35rem .5rem; border:1.5px solid var(--border); border-radius:8px; background:var(--surface); width:100%;}
+.setup textarea{min-height:4.2rem;}
+.hintline{color:var(--muted); font-size:.88rem;}
+
+.stage{display:grid; gap:1.2rem; grid-template-columns:1fr; margin-top:1rem;}
+@media (min-width:940px){ .stage{grid-template-columns:minmax(0,1fr) 330px; align-items:start;} }
+
+/* card */
+.scene{perspective:1400px;}
+.card{display:grid; transform-style:preserve-3d; transition:transform .6s cubic-bezier(.3,.7,.2,1);}
+.card.flipped{transform:rotateY(180deg);}
+.face{grid-area:1/1; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:18px; min-height:22rem; padding:1.5rem 1.7rem 1.4rem; display:flex; flex-direction:column; border:1.5px solid var(--border); background:var(--surface); position:relative; overflow:hidden;}
+.face.back-face{transform:rotateY(180deg); background:var(--back); border-color:var(--back-border);}
+.face::before{content:""; position:absolute; left:0; top:0; bottom:0; width:12px; background:var(--cat,var(--steel));}
+.face .tag{font-size:.95rem; color:var(--muted); margin:0 0 .6rem .4rem; display:flex; align-items:center; gap:.5rem;}
+.face .tag .dot{background:var(--cat,var(--steel));}
+.face h2{font-size:clamp(1.7rem,4.6vw,2.6rem); color:var(--navy); margin:0 0 .8rem .4rem; font-weight:700;}
+.face .prompt{font-size:clamp(1.1rem,2.4vw,1.4rem); margin:0 0 0 .4rem; max-width:44ch;}
+.face .quote{font-family:"Source Serif 4",Georgia,serif; font-size:clamp(1.3rem,3.2vw,1.9rem); font-weight:700; color:var(--text); margin:0 0 .9rem .4rem; line-height:1.3;}
+.face .foot{margin-top:auto; padding-top:1rem; margin-left:.4rem; color:var(--muted); font-size:.92rem;}
+.back-face h3{font-size:1.05rem; margin:.7rem 0 .25rem .4rem; color:var(--navy); font-family:"Atkinson Hyperlegible",system-ui,sans-serif; font-weight:700;}
+.back-face h3:first-of-type{margin-top:0;}
+.back-face ul{margin:0 0 .2rem .4rem; padding-left:1.2rem;} .back-face li{margin-bottom:.2rem;}
+.back-face p{margin:0 0 .3rem .4rem;}
+.back-title{font-family:"Source Serif 4",Georgia,serif; font-size:1.3rem; font-weight:700; color:var(--navy); margin:0 0 .5rem .4rem;}
+
+/* deck back (face down) */
+.deckback{background:linear-gradient(135deg,var(--deck-a),var(--deck-b)); border-color:var(--deck-a); color:#fff; align-items:center; justify-content:center; text-align:center;}
+.deckback::before{display:none;}
+.deckback .stripe{position:absolute; left:0; right:0; top:0; height:12px; display:grid; grid-template-columns:18% 16% 20% 16% 30%;}
+.deckback .stripe span:nth-child(1),.deckback .stripe span:nth-child(4){background:#0E1E40;} .deckback .stripe span:nth-child(3){background:#8A96B4;} .deckback .stripe span:nth-child(5){background:#F6CE2A;}
+.deckback h2{color:#fff; margin:0 0 .5rem;} .deckback p{color:#DDE6F7; font-size:1.1rem; margin:0;}
+.deckback .big{font-family:"Source Serif 4",Georgia,serif; font-size:clamp(2rem,6vw,3.2rem); font-weight:700; color:#F6CE2A; margin-bottom:.3rem;}
+
+.controls{display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1rem;}
+.btn{border:0; border-radius:10px; padding:.7rem 1.15rem; font-weight:700; cursor:pointer; background:var(--primary); color:var(--primary-ink);}
+.btn.alt{background:transparent; border:1.5px solid var(--border); color:var(--text);}
+.btn.big{font-size:1.1rem; padding:.8rem 1.5rem;}
+.btn[disabled]{opacity:.45; cursor:not-allowed;}
+.btn:hover:not([disabled]){filter:brightness(1.08);}
+.btn[aria-pressed="true"]{background:var(--warn-bg); color:var(--warn); border-color:var(--warn);}
+kbd{font-family:inherit; border:1px solid var(--border); border-bottom-width:2px; border-radius:5px; padding:0 .35rem; font-size:.85rem; background:var(--surface);}
+
+/* side */
+.side{display:grid; gap:1rem;}
+.box{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:1rem 1.1rem;}
+.box h2{font-size:1.1rem; margin-bottom:.5rem; color:var(--navy);}
+.who{font-size:1.05rem;} .who b{font-family:"Source Serif 4",Georgia,serif; font-size:1.35rem; color:var(--navy);}
+.phases{display:flex; gap:.4rem; margin:.7rem 0;}
+.phase{flex:1; text-align:center; padding:.35rem .2rem; border-radius:99px; border:1.5px solid var(--border); font-size:.9rem; color:var(--muted);}
+.phase.on{background:var(--primary); color:var(--primary-ink); border-color:var(--primary); font-weight:700;}
+.phase.done{border-color:var(--ok); color:var(--ok);}
+.ring{position:relative; width:11rem; height:11rem; margin:.4rem auto;}
+.ring svg{width:100%; height:100%; transform:rotate(-90deg);}
+.ring .track{stroke:var(--border);} .ring .prog{stroke:var(--navy); transition:stroke-dashoffset .25s linear;}
+.ring.low .prog{stroke:#C77700;}
+.time{position:absolute; inset:0; display:grid; place-items:center; text-align:center; font-family:"Source Serif 4",Georgia,serif; font-size:2.8rem; font-weight:700; color:var(--text); line-height:1;}
+.time small{display:block; font-family:"Atkinson Hyperlegible",system-ui,sans-serif; font-size:.9rem; font-weight:400; color:var(--muted); margin-top:.3rem;}
+.trow{display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap;}
+.trow .btn{padding:.5rem .9rem;}
+.check label{display:flex; gap:.6rem; align-items:flex-start; margin:.35rem 0; cursor:pointer;}
+.check input{width:1.2rem; height:1.2rem; margin-top:.2rem; accent-color:var(--navy);}
+.muddy ul{margin:.3rem 0 .6rem; padding-left:1.2rem;} .muddy li{margin-bottom:.15rem;}
+.muddy .empty{color:var(--muted);}
+.status{color:var(--muted); font-size:.92rem; min-height:1.3rem; margin-top:.4rem;}
+.flash{animation:flash .5s ease-out;}
+@keyframes flash{from{box-shadow:0 0 0 4px var(--gold)} to{box-shadow:0 0 0 0 transparent}}
+@media (prefers-reduced-motion: reduce){ .card{transition:none;} .flash{animation:none;} .ring .prog{transition:none;} }
+</style>
+</head>
+<body>
+<div class="bar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="course">DPTC 6311 | Module 7: Putting It All Together + Review</div>
+      <h1>EBP1 review flashcards: explain it</h1>
+    </div>
+    <div class="counts" aria-live="polite"><span>Cards left <b id="left">0</b></span><span>Drawn <b id="drawn">0</b></span></div>
+  </header>
+
+  <details class="panel" id="howto" open>
+    <summary>How to use this in your room</summary>
+    <ol class="how">
+      <li>One person shares their screen. Everyone else follows along and listens.</li>
+      <li>Optional: add names in Setup so the page tells you whose turn it is.</li>
+      <li>Draw a card. The speaker thinks, then explains, then the group adds to it. The timer runs these three phases for you.</li>
+      <li>Listeners use the checklist. Then flip the card to self-check against the back.</li>
+      <li>Mark any card that felt muddy. Your list is ready to bring back to the whole class.</li>
+    </ol>
+  </details>
+
+  <details class="panel" id="setup">
+    <summary>Setup: cards, timer, and names</summary>
+    <div class="setup">
+      <fieldset>
+        <legend>Modules to include</legend>
+        <div id="modBoxes"></div>
+        <p class="hintline">Choose one or more modules.</p>
+      </fieldset>
+      <fieldset>
+        <legend>Card types to include</legend>
+        <div id="catBoxes"></div>
+        <p class="hintline">Choose the kinds of thinking you want students to practice.</p>
+      </fieldset>
+      <fieldset>
+        <legend>Timer</legend>
+        <label for="preset">Preset</label>
+        <select id="preset">
+          <option value="30,90,60">Standard: think 30, explain 90, discuss 60</option>
+          <option value="20,60,40">Quick: think 20, explain 60, discuss 40</option>
+          <option value="45,120,90">Extended: think 45, explain 120, discuss 90</option>
+          <option value="custom">Custom (use the boxes below)</option>
+          <option value="off">No timer</option>
+        </select>
+        <div class="nums" style="margin-top:.6rem">
+          <label for="tThink">Think (seconds)</label><input id="tThink" type="number" min="5" max="600" value="30">
+          <label for="tExplain">Explain (seconds)</label><input id="tExplain" type="number" min="10" max="900" value="90">
+          <label for="tDiscuss">Discuss (seconds)</label><input id="tDiscuss" type="number" min="10" max="900" value="60">
+        </div>
+        <label><input type="checkbox" id="auto" checked> Start the timer when a card is drawn</label>
+        <label><input type="checkbox" id="beep"> Play a soft chime between phases</label>
+      </fieldset>
+      <fieldset>
+        <legend>Group members (optional)</legend>
+        <label for="names" class="hintline">One name per line, or separate with commas</label>
+        <textarea id="names" placeholder="Alex&#10;Sam&#10;Priya"></textarea>
+        <button class="btn alt" id="applySetup" style="margin-top:.6rem">Apply and shuffle</button>
+      </fieldset>
+    </div>
+  </details>
+
+  <div class="stage">
+    <section aria-label="Flashcard">
+      <div class="scene">
+        <div class="card" id="card">
+          <div class="face deckback" id="faceFront">
+            <span class="stripe" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>
+            <div><div class="big">EBP1</div><h2>Review flashcards</h2><p>Draw a card to begin.</p></div>
+          </div>
+          <div class="face back-face" id="faceBack" inert aria-hidden="true"></div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="btn big" id="draw" aria-keyshortcuts="D">Draw a card</button>
+        <button class="btn alt" id="flip" aria-keyshortcuts="F" disabled>Flip card</button>
+        <button class="btn alt" id="pass" disabled>Pass (swap card)</button>
+        <button class="btn alt" id="mud" aria-pressed="false" aria-keyshortcuts="M" disabled>Mark as muddy</button>
+      </div>
+      <p class="hintline" style="margin-top:.6rem">Shortcuts: <kbd>D</kbd> draw, <kbd>F</kbd> flip, <kbd>P</kbd> pause or resume, <kbd>M</kbd> mark muddy.</p>
+      <p class="status" id="msg" role="status"></p>
+    </section>
+
+    <aside class="side" aria-label="Turn tools">
+      <div class="box">
+        <h2>Turn</h2>
+        <p class="who" id="who">Draw a card to start.</p>
+        <div class="phases" id="phases" aria-hidden="true"><span class="phase" data-p="think">Think</span><span class="phase" data-p="explain">Explain</span><span class="phase" data-p="discuss">Discuss</span></div>
+        <div class="ring" id="ring">
+          <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="track" cx="50" cy="50" r="44" fill="none" stroke-width="7"/><circle class="prog" id="prog" cx="50" cy="50" r="44" fill="none" stroke-width="7" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="0"/></svg>
+          <div class="time"><div><span id="clock">0:00</span><small id="phaseLabel">Ready</small></div></div>
+        </div>
+        <div class="trow">
+          <button class="btn alt" id="pp" disabled>Start</button>
+          <button class="btn alt" id="skip" disabled>Next phase</button>
+          <button class="btn alt" id="reset" disabled>Restart</button>
+        </div>
+        <div class="sr" id="announce" role="status" aria-live="polite"></div>
+      </div>
+      <div class="box check">
+        <h2>Listener checklist</h2>
+        <div id="checks"><p class="hintline">Draw a card to see what to listen for.</p></div>
+      </div>
+      <div class="box muddy">
+        <h2>Muddy cards</h2>
+        <div id="muddyList"><p class="empty">None yet. Mark any card that felt unclear.</p></div>
+        <button class="btn alt" id="copy" disabled>Copy list</button>
+        <p class="status" id="copied" role="status"></p>
+      </div>
+    </aside>
+  </div>
+  <p class="hintline" style="margin-top:1.4rem">Practice material for review. This deck intentionally emphasizes concepts, study design, appraisal, and application rather than statistical calculations or statistics terminology. Module 5–6 cards reflect the current course outline and can be refined after final instructional materials are available. Card content is a study aid, not a substitute for your course readings. Everything runs in your browser; nothing is saved or sent.</p>
+</div>
+
+<script>
+"use strict";
+const CATS={
+  design:{label:"Study designs",color:"var(--c-design)",prompt:"Explain it: what question does it answer, what can it NOT claim, and what is one threat to validity?",check:["Said what question it answers","Said what it can\u2019t claim","Named one threat to validity"]},
+  concept:{label:"Key concepts",color:"var(--c-concept)",prompt:"Explain it in plain language, with a clinical example.",check:["Defined it in plain language","Gave a clinical example","Avoided the common mix-up"]},
+  claim:{label:"Fix the claim",color:"var(--c-claim)",prompt:"What is wrong with this claim, and how would you reword it?",check:["Named what is overstated","Said what the design can support","Offered better wording"]},
+  case:{label:"Mini cases",color:"var(--c-case)",prompt:"Which kind of question is this, and which design fits best? Why?",check:["Named the question type","Chose a fitting design","Gave a reason"]},
+  apply:{label:"Appraise and apply",color:"var(--c-apply)",prompt:"Explain it as if to a classmate who missed the session.",check:["Covered the key points","Used a clinical example","Kept it in plain language"]}
+};
+const CARDS=[
+ /* study designs */
+ {c:"design",t:"Expert opinion",pts:["Recommendations based on clinical experience, reasoning, or consensus","Not a systematic study of participants","Useful for rare or emerging situations and for generating ideas"],cant:"Typical outcomes, or cause and effect.",watch:"Confirmation bias and selective experience."},
+ {c:"design",t:"Case report",pts:["One patient described in rich detail: history, exam, intervention, outcome","Useful for rare or unusual presentations, novel approaches, unexpected responses, and adverse events"],cant:"That the intervention caused the change, or that other patients will respond the same way.",watch:"No comparison group, natural recovery, and one patient who may not represent others."},
+ {c:"design",t:"Case series",pts:["Several patients with a shared feature described together","Shows patterns, feasibility, and early signals","Can be prospective or retrospective"],cant:"Cause and effect.",watch:"No comparison group, which cases got reported, and natural history."},
+ {c:"design",t:"Qualitative research",pts:["Explores experiences, perspectives, and meaning (interviews, focus groups, observation)","Participants are chosen on purpose because they can give rich, relevant insight","Findings are themes, not averages"],cant:"How common something is, or whether a treatment works.",watch:"Researcher influence that isn\u2019t acknowledged, unclear methods, and thin description of the setting (which limits transferability)."},
+ {c:"design",t:"Mixed methods",pts:["Intentionally integrates qualitative and quantitative strands to answer a question neither answers alone","Explanatory sequential: numbers first, then interviews to explain them","Exploratory sequential: interviews first, then a larger test of what was found"],cant:"More than each strand supports. Running both is not the same as integrating them.",watch:"Strands that are never actually connected."},
+ {c:"design",t:"Cross-sectional study",pts:["Measures people at one point in time","Shows what exists now and what goes together","Quick and descriptive"],cant:"Which came first, so it can\u2019t show cause or what happens over time.",watch:"A sample that doesn\u2019t represent the population, and no time order."},
+ {c:"design",t:"Case-control study",pts:["Starts with the outcome: compares people who have it (cases) with similar people who don\u2019t (controls)","Looks back at earlier exposures","Good for rare outcomes"],cant:"That an exposure caused the outcome.",watch:"Recall bias and the difficulty of choosing good controls."},
+ {c:"design",t:"Cohort study",pts:["Follows groups over time and compares those with and without an exposure or characteristic","Prospective: planned and followed forward. Retrospective: uses existing records","A natural fit for prognosis questions"],cant:"Cause and effect. It shows association.",watch:"People lost to follow-up and other differences between the groups."},
+ {c:"design",t:"Randomized controlled trial (RCT)",pts:["People are randomly assigned to an intervention or a comparison group, then followed","Randomization makes the groups similar at the start","Best design for asking whether an intervention works"],cant:"That every patient will respond the same way, or that results apply to people unlike the participants.",watch:"Assessors who knew the groups, many dropouts, and unclear randomization."},
+ {c:"design",t:"Systematic review and meta-analysis",pts:["A systematic review finds and appraises the relevant studies with a clear, repeatable method","A meta-analysis combines results across similar studies","Synthesizes evidence instead of relying on one study"],cant:"More than the included studies can support.",watch:"Weak included studies, missed studies, and studies too different to combine."},
+ {c:"design",t:"Clinical practice guideline",pts:["Recommendations developed by a panel using evidence and expert judgment","Summarizes and grades the evidence to support decisions","Written for typical patients"],cant:"That it fits every patient. Guidelines can also lag behind new research.",watch:"How the evidence was gathered, conflicts of interest, and fit with your patient."},
+ {c:"design",t:"Diagnostic accuracy study",pts:["Compares a test being studied (the index test) with a reference standard in the same patients","Ideally everyone gets both tests and examiners are independent","Tells you how well a test works"],cant:"That the test is useful in every setting. A test result is one piece of the picture.",watch:"Examiners who knew the reference result, and patients who aren\u2019t like yours."},
+ {c:"design",t:"Prognostic cohort study",pts:["Follows people from an early point to see who reaches an outcome and which early factors go with it","Answers: what is likely to happen?"],cant:"That an early factor caused the outcome, or what will happen to one individual.",watch:"Many participants lost to follow-up and people enrolled at different points."},
+ /* key concepts */
+ {c:"concept",t:"Bias",pts:["Anything that pushes results away from the truth","Can come from who is studied, how outcomes are measured, or who drops out","Matters because biased results can mislead care"],mix:"Bias is about how a study was run, not about researchers having bad intent."},
+ {c:"concept",t:"Internal validity vs. applicability",pts:["Internal validity: can I trust the results inside this study?","Applicability: do the results fit my patient?"],mix:"A well-run study can still not apply to your patient, and a study that fits your patient can still be untrustworthy."},
+ {c:"concept",t:"Association vs. causation",pts:["Association: two things go together","Causation: one produces change in the other","Only some designs, such as a well-run RCT, can support causal claims"],mix:"\u201cWas associated with\u201d and \u201ccaused\u201d are not interchangeable."},
+ {c:"concept",t:"Transferability vs. generalizability",pts:["Transferability (qualitative): is this context similar enough to inform my setting?","Generalizability (quantitative): does this sample statistically represent a broader population?"],mix:"Qualitative findings are judged on transferability, not generalizability."},
+ {c:"concept",t:"Hierarchy of evidence",pts:["Ranks designs by how well they protect against bias for certain kinds of questions","Stronger designs reduce uncertainty","The best design depends on the question"],mix:"Higher is not always better for every question. A question about experience needs a qualitative design."},
+ {c:"concept",t:"Blinding",pts:["Keeping participants and/or assessors unaware of group assignment","Reduces bias in how outcomes are measured or reported"],mix:"Participants can\u2019t always be blinded in exercise trials, but assessors often can be."},
+ {c:"concept",t:"Randomization",pts:["Random assignment gives each person an equal chance of each group","Groups end up similar at the start, even on things nobody measured"],mix:"Random assignment is not the same as random sampling."},
+ {c:"concept",t:"Comparison group",pts:["A group to compare with, so you can tell whether change is due to the intervention or would have happened anyway","Natural recovery is the classic reason to need one"],mix:"A before-and-after look at one group is not a comparison group."},
+ {c:"concept",t:"Index test and reference standard",pts:["Index test: the test being evaluated","Reference standard: the best available way to know the true condition","Both are applied to the same patients"],mix:"The reference standard isn\u2019t perfect. It is just the best comparison available."},
+ {c:"concept",t:"Prospective vs. retrospective",pts:["Prospective: planned in advance, with data collected going forward","Retrospective: looks back at existing records or events"],mix:"Retrospective studies can be convenient, but records may be incomplete or inconsistent."},
+ {c:"concept",t:"Loss to follow-up (attrition)",pts:["Participants who leave before the study ends","If many leave, especially in a non-random way, results can look better or worse than reality"],mix:"Not every dropout is a problem. Check how many and why."},
+ {c:"concept",t:"Purposeful sampling",pts:["Qualitative researchers choose participants who can give rich, relevant insight","Selection is deliberate, not random"],mix:"A small sample is not automatically a weakness in qualitative research."},
+ {c:"concept",t:"Reflexivity",pts:["Researchers reflect on how their perspectives and decisions shape the research","Makes their influence visible, which supports credibility"],mix:"It doesn\u2019t remove the researcher\u2019s influence. It makes that influence transparent."},
+ {c:"concept",t:"Predatory publishing",pts:["Journals that charge fees but offer little or no real peer review","Articles can look credible while skipping quality checks","Check the journal\u2019s reputation, indexing, and peer-review process"],mix:"Open access does not mean predatory."},
+ /* fix the claim */
+ {c:"claim",q:"This case series proves the program works.",why:"A case series has no comparison group, so it can\u2019t show that the program caused the improvement.",better:"In this case series, patients improved after the program. Without a comparison group, we can\u2019t tell whether the program caused the improvement."},
+ {c:"claim",q:"This cross-sectional survey shows that long hours of sitting cause low back pain.",why:"A cross-sectional study measures everyone at one time, so it can\u2019t tell which came first or whether one caused the other.",better:"In this survey, more sitting time was associated with more low back pain. It can\u2019t show which came first or whether sitting caused it."},
+ {c:"claim",q:"A retrospective cohort study found that stretching prevents hamstring injuries.",why:"A cohort study shows an association. Other differences between players who stretched and those who didn\u2019t could explain the result.",better:"Players who stretched had fewer hamstring injuries in this cohort. That is an association; it can\u2019t show that stretching prevented the injuries."},
+ {c:"claim",q:"A qualitative study of 12 patients shows most patients dislike telehealth.",why:"Qualitative research explores experiences and meaning. It can\u2019t tell you how common a view is.",better:"In this qualitative study, several participants described difficulties with telehealth. The study can\u2019t tell us how common these views are."},
+ {c:"claim",q:"One well-known expert recommends this technique, so the question is settled.",why:"Expert opinion is not a systematic study. It can reflect selective experience and can\u2019t show typical outcomes.",better:"An expert recommends this technique. That is useful perspective, but I would look for studies that compare it with other approaches."},
+ {c:"claim",q:"The RCT showed the treatment group improved, so every patient will improve.",why:"Trials describe groups. They can\u2019t guarantee how any one patient will respond, and the participants may differ from your patient.",better:"On average, the treatment group improved more than the comparison group. Individual patients may respond differently, so I\u2019ll check how well the participants match my patient."},
+ {c:"claim",q:"This case report proves the technique is safe.",why:"One patient can\u2019t establish safety for others.",better:"In this case report, the patient tolerated the technique without reported problems. One patient can\u2019t establish that it is safe."},
+ /* mini cases */
+ {c:"case",q:"A family asks whether their father will walk independently again after his stroke.",qt:"Prognosis",d:"Prospective cohort study",why:"Prognosis asks what is likely to happen. A cohort follows people forward from an early point to see who reaches the outcome."},
+ {c:"case",q:"You want to know whether a quick screening tool correctly identifies older adults at risk of falling.",qt:"Diagnosis (how well a test works)",d:"Diagnostic accuracy study",why:"Compare the tool with a reference standard in the same people, ideally with examiners who don\u2019t know the other result."},
+ {c:"case",q:"You want to understand why some patients stop attending their home exercise program.",qt:"Experience (qualitative)",d:"Qualitative study (interviews or focus groups)",why:"The question is about reasons and experiences, not amounts. A mixed-methods design could add attendance data."},
+ {c:"case",q:"A clinic tries a new technique with 8 patients who share a rare condition and wants to describe what happened.",qt:"Descriptive (what happened?)",d:"Case series",why:"Several patients with a shared feature, described together. It shows patterns and feasibility but not cause and effect."},
+ {c:"case",q:"You want to know whether a new balance program reduces falls more than usual care.",qt:"Intervention",d:"Randomized controlled trial",why:"Intervention questions need a comparison, and randomization makes the groups similar at the start."},
+ {c:"case",q:"A rare condition is showing up more often than expected in your clinic, and you want to look back for possible risk factors.",qt:"Risk factors for an outcome that has already happened",d:"Case-control study",why:"Start from people who have the outcome, compare them with similar people who don\u2019t, and look back at earlier exposures."},
+ {c:"case",q:"Hospital records show early mobility is often ordered but patients are mobilized much less often. You want to know why.",qt:"A pattern in the data plus a \u201cwhy\u201d question",d:"Mixed methods (explanatory sequential)",why:"The numbers show the pattern. Interviews with staff then help explain it."},
+ {c:"case",q:"A colleague describes one unusual adverse event during treatment and what led up to it.",qt:"Descriptive (what happened?)",d:"Case report",why:"One patient in rich detail. It can raise a flag, but can\u2019t show how often this happens."},
+ /* appraise and apply */
+ {c:"apply",t:"Searching with a PICOT question",pts:["Break the question into key concepts, not a whole sentence","Join different concepts with AND and synonyms with OR","Use scholarly databases such as PubMed or PEDro, then filter to study types that fit your question"],watch:"Pasting the whole question into a database or filtering to the wrong study type."},
+ {c:"apply",t:"The parts of a PICOT question",pts:["Population, Intervention (or test), Comparison, Outcome, Time","Specific enough to search, broad enough to find studies","Different question types adapt the parts (for example, a reference standard as the comparison)"],watch:"Too vague to search, or so narrow you find nothing."},
+ {c:"apply",t:"What is a critical appraisal tool for?",pts:["A standardized checklist to judge how trustworthy and useful a study is","Different designs use different tools","Helps you appraise consistently instead of by gut feeling"],watch:"Using a tool that was built for a different design."},
+ {c:"apply",t:"Does this study apply to my patient?",pts:["Compare participants with your patient: condition, severity, age, setting, and exclusions","Close enough is the goal, not identical","Note differences that could change the result"],watch:"Confusing applicability with whether the study was well run."},
+ {c:"apply",t:"Evidence-informed practice",pts:["Combines the best available research, your clinical expertise, and the patient\u2019s values and preferences","Research informs the decision; it doesn\u2019t make it"],watch:"Treating research alone as the answer, or ignoring it in favor of habit."},
+ {c:"apply",t:"Explaining a study\u2019s limits to a patient",pts:["Use plain words and be honest","Say what the study does show and what it can\u2019t","Connect it to the patient\u2019s goals and invite questions"],watch:"Overselling the result, or sounding so uncertain the patient has nothing to use."},
+ {c:"apply",t:"Why a stronger design isn\u2019t always the right choice",pts:["The best design depends on the question","Experiences need qualitative designs; rare conditions may only have case reports","Some questions can\u2019t be tested in a trial for practical or ethical reasons"],watch:"Dismissing useful evidence just because it sits lower on a pyramid."},
+ {c:"apply",t:"When the best evidence is limited",pts:["Say so openly","Combine what exists with your clinical expertise and the patient\u2019s values","Monitor the patient\u2019s response and plan to reassess"],watch:"Pretending the evidence is stronger than it is."}
+];
+
+const MODMAP={
+1:["Evidence-informed practice","Hierarchy of evidence","Bias","Internal validity vs. applicability","Predatory publishing"],
+2:["Searching with a PICOT question","The parts of a PICOT question"],
+3:["Expert opinion","Case report","Case series","Qualitative research","Mixed methods","Transferability vs. generalizability","Purposeful sampling","Reflexivity","What is a critical appraisal tool for?"],
+4:["Cross-sectional study","Case-control study","Cohort study","Diagnostic accuracy study","Prognostic cohort study","Association vs. causation","Index test and reference standard","Prospective vs. retrospective","Loss to follow-up (attrition)"],
+5:["Randomized controlled trial (RCT)","Blinding","Randomization","Comparison group"],
+6:["Systematic review and meta-analysis","Clinical practice guideline","Why a stronger design isn’t always the right choice","When the best evidence is limited"]
+};
+function inferredModules(c){
+ const s=(c.t||"")+" "+(c.q||"");
+ let mods=[];
+ Object.entries(MODMAP).forEach(([m,terms])=>{if(terms.some(x=>s.includes(x)))mods.push(Number(m));});
+ if(c.c==="claim"){
+   if(/case series|qualitative|case report|expert/i.test(s)) mods.push(3);
+   if(/cross-sectional|cohort/i.test(s)) mods.push(4);
+   if(/RCT/i.test(s)) mods.push(5);
+ }
+ if(c.c==="case"){
+   if(/screening tool|father will walk|risk factors/i.test(s)) mods.push(4);
+   if(/exercise program|rare condition|adverse event/i.test(s)) mods.push(3);
+   if(/balance program/i.test(s)) mods.push(5);
+   if(/early mobility/i.test(s)) mods.push(3,4);
+ }
+ if(!mods.length) mods=[1,3,4];
+ return [...new Set(mods)];
+}
+CARDS.forEach((c,i)=>{c.id=i;c.m=inferredModules(c);});
+
+// Additional course-aligned, non-statistics cards for Modules 2–6.
+const EXTRA=[
+{c:"concept",m:[2],t:"AND vs. OR in searching",pts:["AND combines different concepts and narrows a search","OR combines synonyms or related terms and broadens a concept","Build the search from key concepts rather than pasting a whole clinical sentence"],mix:"OR between unrelated PICOT concepts usually makes the search less focused."},
+{c:"apply",m:[2],t:"Choosing a database",pts:["Choose based on the clinical question and the literature the database indexes","PubMed/MEDLINE is broad biomedical and clinical literature","CINAHL emphasizes nursing and allied health; PEDro is PT-specific; Cochrane emphasizes synthesized evidence"],watch:"Assuming one database is always the best choice."},
+{c:"concept",m:[2],t:"PubMed and MEDLINE",pts:["They are closely related but not identical","PubMed is a major search platform that includes MEDLINE records plus additional content"],mix:"Do not use the names as though they are exactly interchangeable."},
+{c:"apply",m:[2],t:"Google Scholar in an EBP search",pts:["Useful for broad discovery, citation chasing, finding known articles, and sometimes locating accessible versions","Search methods and ranking are less transparent and results can be difficult to reproduce"],watch:"Using Google Scholar instead of a purposeful search of appropriate health-professions databases."},
+{c:"concept",m:[3],t:"Phenomenology",pts:["Focuses on the meaning or essence of lived experience","Useful when the question centers on how a phenomenon is experienced"],mix:"It is more specific than simply conducting interviews about experiences."},
+{c:"concept",m:[3],t:"Grounded theory",pts:["Aims to develop a theory or explanatory model of a process from the data","Data collection and analysis work together to build the explanation"],mix:"Its goal is not merely to list themes; theory development is central."},
+{c:"concept",m:[3],t:"Ethnography",pts:["Seeks deep understanding of the culture, beliefs, and practices of a group","May involve extended observation and interaction in the group’s natural context"],mix:"A brief interview study is not automatically ethnography."},
+{c:"concept",m:[3],t:"Qualitative descriptive research",pts:["Richly describes experiences, perspectives, processes, or contextual factors","Common in health services and implementation research—for example, exploring barriers and facilitators to implementing a practice"],mix:"It does not require developing a new theory simply because the data are qualitative."},
+{c:"concept",m:[3],t:"Critical appraisal is judgment",pts:["A critical appraisal tool structures attention to important methodological issues","Your judgment should be supported by evidence from the article","The pattern and importance of strengths and limitations matter more than a simple count"],mix:"A CAT is not a scorecard where more Yes boxes automatically means high quality."},
+{c:"concept",m:[4],t:"Confounding",pts:["A third factor is related to both the exposure and outcome and can distort the observed relationship","Ask what else differs between groups that could explain the finding"],mix:"An observed association does not automatically isolate the effect of the exposure."},
+{c:"concept",m:[4],t:"Prognostic factor",pts:["A baseline characteristic or clinical factor associated with a future outcome","It is measured before the outcome of interest occurs"],mix:"A prognostic factor is not automatically a causal factor."},
+{c:"design",m:[5],t:"Randomized controlled trial: why randomize?",pts:["Random assignment creates comparable groups at baseline","It helps balance known and unknown prognostic factors","With an appropriate comparison group, it strengthens causal inference about an intervention"],cant:"That every individual patient will respond the same way.",watch:"Problems with allocation, attrition, contamination, adherence, and outcome assessment."},
+{c:"concept",m:[5],t:"Blinding in rehabilitation trials",pts:["Blinding reduces the chance that knowledge of group assignment influences measurement or reporting","Patients and therapists cannot always be blinded in rehabilitation","Outcome assessors can often still be blinded"],mix:"An RCT is not automatically invalid because participant or therapist blinding is impossible."},
+{c:"claim",m:[5],q:"The RCT found better outcomes in the intervention group, so every patient should receive the intervention.",why:"An RCT estimates effects at the group level. Applicability, patient goals, context, feasibility, harms, and individual response still matter.",better:"The RCT supports the intervention for patients similar to those studied; I would integrate that evidence with this patient’s goals, circumstances, and clinical presentation."},
+{c:"design",m:[6],t:"Systematic review",pts:["Uses explicit, reproducible methods to search for, select, appraise, and synthesize studies addressing a focused question","Synthesizes a body of evidence rather than relying on one study"],cant:"More certainty than the included studies and review methods justify.",watch:"Incomplete searching, weak included studies, inappropriate eligibility decisions, and unexplained differences among studies."},
+{c:"concept",m:[6],t:"Meta-analysis",pts:["A quantitative synthesis that combines results from sufficiently compatible studies","It may be conducted within a systematic review when pooling is appropriate"],mix:"A systematic review does not have to include a meta-analysis, and pooling does not automatically make evidence high quality."},
+{c:"design",m:[6],t:"Clinical practice guideline (CPG)",pts:["Synthesizes evidence into recommendations intended to support clinical decisions","Recommendations should be interpreted in light of evidence strength, benefits and harms, feasibility, context, and patient factors"],cant:"That one recommendation is automatically right for every patient.",watch:"How evidence was gathered, conflicts of interest, currency, and fit with the patient and setting."},
+{c:"concept",m:[6],t:"Clinical prediction rule (CPR)",pts:["Combines clinical findings to help estimate a probability, classification, or outcome","It is a decision-support tool, not a substitute for clinical reasoning"],mix:"A CPR and a clinical practice guideline are different tools with different purposes."},
+{c:"concept",m:[1,6],t:"The best design depends on the question",pts:["Intervention, diagnosis, prognosis, etiology, and qualitative questions call for different forms of evidence","Judge a design by how well it answers the clinical question—not simply by its position on a generic pyramid"],mix:"There is no single study design that is strongest for every clinical question."},
+{c:"apply",m:[1,2,3,4,5,6],t:"From uncertainty to an evidence-informed decision",pts:["Recognize the knowledge gap and ask a focused question","Acquire and appraise relevant evidence","Apply it with clinical expertise and patient values, preferences, goals, and context","Reflect on the decision and identify the next learning need"],watch:"Treating EBP as a one-time literature search rather than an iterative clinical reasoning process."}
+];
+EXTRA.forEach(c=>{c.id=CARDS.length;CARDS.push(c);});
+
+
+/* ---------- state ---------- */
+const $=(id)=>document.getElementById(id);
+const esc=(s)=>String(s).replace(/[&<>"']/g,(m)=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const S={deck:[],cur:null,flipped:false,drawn:0,turn:0,names:[],muddy:[],dur:{think:30,explain:90,discuss:60},timerOn:true,phase:"idle",remaining:0,total:0,running:false,endAt:0,timerId:null,sel:new Set(Object.keys(CATS)),mods:new Set([1,2,3,4,5,6]),audio:null};
+const PHASES=["think","explain","discuss"];
+const PLABEL={think:"Think",explain:"Explain",discuss:"Discuss",done:"Time",idle:"Ready"};
+
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+function buildDeck(){ S.deck=shuffle(CARDS.filter(c=>S.sel.has(c.c)&&c.m.some(m=>S.mods.has(m))).map(c=>c.id)); updateCounts(); }
+function updateCounts(){ $("left").textContent=S.deck.length; $("drawn").textContent=S.drawn; }
+function say(msg){ $("announce").textContent=""; setTimeout(()=>{$("announce").textContent=msg;},30); }
+function note(msg){ $("msg").textContent=msg; }
+
+/* ---------- setup ---------- */
+function renderMods(){
+ $("modBoxes").innerHTML=[1,2,3,4,5,6].map(m=>{
+   const n=CARDS.filter(c=>c.m.includes(m)).length;
+   return `<label><input type="checkbox" data-mod="${m}" ${S.mods.has(m)?"checked":""}><span class="dot" style="background:${m%2?"var(--c-concept)":"var(--c-case)"}"></span>Module ${m} (${n})</label>`;
+ }).join("");
+}
+function renderCats(){
+  $("catBoxes").innerHTML=Object.entries(CATS).map(([k,v])=>{
+    const n=CARDS.filter(c=>c.c===k).length;
+    return `<label><input type="checkbox" data-cat="${k}" ${S.sel.has(k)?"checked":""}><span class="dot" style="background:${v.color}"></span>${esc(v.label)} (${n})</label>`;
+  }).join("");
+}
+function readTimerInputs(){
+  const v=$("preset").value;
+  if(v==="off"){ S.timerOn=false; return; }
+  S.timerOn=true;
+  if(v!=="custom"){ const [a,b,c]=v.split(",").map(Number); S.dur={think:a,explain:b,discuss:c}; $("tThink").value=a; $("tExplain").value=b; $("tDiscuss").value=c; }
+  else{ const clamp=(x,lo,hi,d)=>{x=Number(x); return isFinite(x)&&x>=lo?Math.min(x,hi):d;}; S.dur={think:clamp($("tThink").value,5,600,30),explain:clamp($("tExplain").value,10,900,90),discuss:clamp($("tDiscuss").value,10,900,60)}; }
+}
+function readNames(){ S.names=$("names").value.split(/[\n,]+/).map(s=>s.trim()).filter(Boolean).slice(0,12); }
+function applySetup(){
+  const sel=new Set([...document.querySelectorAll("[data-cat]")].filter(b=>b.checked).map(b=>b.dataset.cat));
+  if(sel.size===0){ note("Pick at least one card type."); return; }
+  const mods=new Set([...document.querySelectorAll("[data-mod]")].filter(b=>b.checked).map(b=>Number(b.dataset.mod)));
+  if(mods.size===0){ note("Pick at least one module."); return; }
+  S.sel=sel; S.mods=mods; readTimerInputs(); readNames();
+  stopTimer(); S.cur=null; S.flipped=false; S.phase="idle"; S.drawn=0; S.turn=0; S.muddy=[];
+  buildDeck(); renderCard(); renderTurn(); renderMuddy(); renderTimer(); setButtons();
+  note("Deck shuffled with "+S.deck.length+" cards.");
+}
+
+/* ---------- card rendering ---------- */
+function renderCard(){
+  const f=$("faceFront"), b=$("faceBack"), card=$("card");
+  card.classList.toggle("flipped",S.flipped);
+  if(!S.cur){
+    f.className="face deckback"; f.removeAttribute("style"); f.removeAttribute("inert"); f.setAttribute("aria-hidden","false");
+    f.innerHTML=`<span class="stripe" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span><div><div class="big">EBP1</div><h2>Review flashcards</h2><p>${S.deck.length?"Draw a card to begin.":"No cards left. Apply setup to shuffle again."}</p></div>`;
+    b.innerHTML=""; b.setAttribute("inert",""); b.setAttribute("aria-hidden","true"); return;
+  }
+  const c=S.cur, cat=CATS[c.c];
+  f.className="face"; f.style.setProperty("--cat",cat.color);
+  const tag=`<p class="tag"><span class="dot" aria-hidden="true"></span>${esc(cat.label)} · ${c.m.map(m=>"Module "+m).join(" / ")}</p>`;
+  let front;
+  if(c.c==="claim") front=`${tag}<p class="quote">\u201c${esc(c.q)}\u201d</p><p class="prompt">${esc(cat.prompt)}</p>`;
+  else if(c.c==="case") front=`${tag}<p class="quote">${esc(c.q)}</p><p class="prompt">${esc(cat.prompt)}</p>`;
+  else front=`${tag}<h2>${esc(c.t)}</h2><p class="prompt">${esc(cat.prompt)}</p>`;
+  f.innerHTML=front+`<p class="foot">Flip the card when you are ready to check.</p>`;
+  b.style.setProperty("--cat",cat.color);
+  let back="";
+  if(c.c==="design") back=`<p class="back-title">${esc(c.t)}</p><h3>Key points</h3><ul>${c.pts.map(p=>`<li>${esc(p)}</li>`).join("")}</ul><h3>Can\u2019t claim</h3><p>${esc(c.cant)}</p><h3>Watch for</h3><p>${esc(c.watch)}</p>`;
+  else if(c.c==="concept") back=`<p class="back-title">${esc(c.t)}</p><h3>Key points</h3><ul>${c.pts.map(p=>`<li>${esc(p)}</li>`).join("")}</ul><h3>Common mix-up</h3><p>${esc(c.mix)}</p>`;
+  else if(c.c==="claim") back=`<p class="back-title">Fix the claim</p><h3>Why it overreaches</h3><p>${esc(c.why)}</p><h3>Better wording</h3><p>${esc(c.better)}</p>`;
+  else if(c.c==="case") back=`<p class="back-title">Mini case</p><h3>Question type</h3><p>${esc(c.qt)}</p><h3>Best-fit design</h3><p>${esc(c.d)}</p><h3>Why</h3><p>${esc(c.why)}</p>`;
+  else back=`<p class="back-title">${esc(c.t)}</p><h3>Key points</h3><ul>${c.pts.map(p=>`<li>${esc(p)}</li>`).join("")}</ul><h3>Watch for</h3><p>${esc(c.watch)}</p>`;
+  b.innerHTML=back;
+  // only the visible face is exposed to assistive tech and keyboard
+  if(S.flipped){ f.setAttribute("inert",""); f.setAttribute("aria-hidden","true"); b.removeAttribute("inert"); b.setAttribute("aria-hidden","false"); }
+  else{ b.setAttribute("inert",""); b.setAttribute("aria-hidden","true"); f.removeAttribute("inert"); f.setAttribute("aria-hidden","false"); }
+}
+function renderChecks(){
+  const box=$("checks");
+  if(!S.cur){ box.innerHTML=`<p class="hintline">Draw a card to see what to listen for.</p>`; return; }
+  box.innerHTML=CATS[S.cur.c].check.map((t,i)=>`<label><input type="checkbox" id="ck${i}"> <span>${esc(t)}</span></label>`).join("");
+}
+function renderTurn(){
+  const el=$("who");
+  if(S.names.length){
+    const idx=S.cur? (S.turn-1) : S.turn;
+    const n=S.names[((idx%S.names.length)+S.names.length)%S.names.length];
+    el.innerHTML=S.cur? `Speaking: <b>${esc(n)}</b>` : `Up first: <b>${esc(n)}</b>`;
+  } else el.textContent=S.cur? "Speaker: take your turn." : "Draw a card to start.";
+}
+function renderMuddy(){
+  const box=$("muddyList"), mine=S.muddy.map(id=>CARDS[id]);
+  if(!mine.length){ box.innerHTML=`<p class="empty">None yet. Mark any card that felt unclear.</p>`; $("copy").disabled=true; return; }
+  box.innerHTML=`<ul>${mine.map(c=>`<li>${esc(titleOf(c))}</li>`).join("")}</ul>`; $("copy").disabled=false;
+  if(S.cur) { $("mud").setAttribute("aria-pressed",String(S.muddy.includes(S.cur.id))); $("mud").textContent=S.muddy.includes(S.cur.id)?"Marked as muddy":"Mark as muddy"; }
+}
+function titleOf(c){ return c.t || (c.c==="claim"? "Fix the claim: \u201c"+c.q.slice(0,60)+(c.q.length>60?"\u2026":"")+"\u201d" : "Mini case: "+c.q.slice(0,60)+(c.q.length>60?"\u2026":"")); }
+function setButtons(){
+  const has=!!S.cur;
+  $("flip").disabled=!has; $("pass").disabled=!has||S.deck.length===0; $("mud").disabled=!has;
+  $("draw").disabled=S.deck.length===0;
+  $("draw").textContent=has?"Draw next card":"Draw a card";
+  const t=S.timerOn&&has;
+  $("pp").disabled=!t||S.phase==="done"; $("skip").disabled=!t; $("reset").disabled=!t;
+  $("pp").textContent=S.running?"Pause":(S.phase==="think"&&S.remaining===S.total?"Start":"Resume");
+  $("flip").textContent=S.flipped?"Flip back":"Flip card";
+  if(has){ $("mud").setAttribute("aria-pressed",String(S.muddy.includes(S.cur.id))); $("mud").textContent=S.muddy.includes(S.cur.id)?"Marked as muddy":"Mark as muddy"; }
+  else { $("mud").setAttribute("aria-pressed","false"); $("mud").textContent="Mark as muddy"; }
+}
+
+/* ---------- timer ---------- */
+function fmt(s){ s=Math.max(0,Math.ceil(s)); return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); }
+function renderTimer(){
+  const ring=$("ring"), prog=$("prog"), C=276.46;
+  document.querySelectorAll(".phase").forEach(p=>{
+    const k=p.dataset.p, i=PHASES.indexOf(k), cur=PHASES.indexOf(S.phase);
+    p.classList.toggle("on",S.phase===k); p.classList.toggle("done",S.phase==="done"||(cur>-1&&i<cur));
+  });
+  if(!S.timerOn){ $("clock").textContent="--:--"; $("phaseLabel").textContent="Timer off"; prog.style.strokeDashoffset="0"; ring.classList.remove("low"); return; }
+  if(!S.cur){ $("clock").textContent="0:00"; $("phaseLabel").textContent="Ready"; prog.style.strokeDashoffset="0"; ring.classList.remove("low"); return; }
+  $("clock").textContent=S.phase==="done"?"0:00":fmt(S.remaining);
+  $("phaseLabel").textContent=PLABEL[S.phase]||"";
+  const frac=S.phase==="done"?0:(S.total? S.remaining/S.total:0);
+  prog.style.strokeDashoffset=String(C*(1-Math.max(0,Math.min(1,frac))));
+  ring.classList.toggle("low",S.running&&S.remaining<=10&&S.phase!=="done");
+}
+function chime(){
+  if(!$("beep").checked) return;
+  try{
+    S.audio=S.audio||new (window.AudioContext||window.webkitAudioContext)();
+    const ctx=S.audio, o=ctx.createOscillator(), g=ctx.createGain();
+    o.type="sine"; o.frequency.value=660; g.gain.setValueAtTime(0.0001,ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.15,ctx.currentTime+0.02); g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.5);
+    o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime+0.55);
+  }catch(e){}
+}
+function stopTimer(){ if(S.timerId){ clearInterval(S.timerId); S.timerId=null; } S.running=false; }
+function enterPhase(p){
+  S.phase=p;
+  if(p==="done"){ stopTimer(); S.remaining=0; S.total=0; say("Time is up. Flip the card to check."); note("Time is up. Flip the card to check against the back."); chime(); }
+  else{ S.total=S.dur[p]; S.remaining=S.total; say(PLABEL[p]+" phase, "+S.total+" seconds."); if(p!=="think") chime(); }
+  renderTimer(); setButtons();
+}
+function tick(){
+  if(!S.running) return;
+  S.remaining=(S.endAt-Date.now())/1000;
+  if(S.remaining<=0){
+    const i=PHASES.indexOf(S.phase);
+    if(i<PHASES.length-1){ enterPhase(PHASES[i+1]); S.endAt=Date.now()+S.total*1000; } else enterPhase("done");
+  }
+  renderTimer();
+}
+function startTimer(){ if(!S.timerOn||!S.cur||S.phase==="done") return; S.running=true; S.endAt=Date.now()+S.remaining*1000; if(!S.timerId) S.timerId=setInterval(tick,200); renderTimer(); setButtons(); }
+function pauseTimer(){ if(S.running){ S.remaining=(S.endAt-Date.now())/1000; } stopTimer(); renderTimer(); setButtons(); }
+function toggleTimer(){ if(S.running) pauseTimer(); else startTimer(); }
+function nextPhase(){
+  if(!S.timerOn||!S.cur) return; const wasRunning=S.running;
+  const i=PHASES.indexOf(S.phase);
+  if(S.phase==="done") return;
+  if(i<PHASES.length-1){ enterPhase(PHASES[i+1]); if(wasRunning){ S.running=true; S.endAt=Date.now()+S.total*1000; } } else enterPhase("done");
+  renderTimer(); setButtons();
+}
+function restartTimer(){ if(!S.timerOn||!S.cur) return; stopTimer(); enterPhase("think"); if($("auto").checked) startTimer(); }
+
+/* ---------- actions ---------- */
+function drawCard(){
+  if(!S.deck.length){ note("No cards left. Open Setup and choose Apply and shuffle."); return; }
+  stopTimer();
+  const id=S.deck.pop(); S.cur=CARDS[id]; S.flipped=false; S.drawn++; S.turn++;
+  renderCard(); renderChecks(); renderTurn(); updateCounts();
+  S.phase=S.timerOn?"think":"idle"; if(S.timerOn){ S.total=S.dur.think; S.remaining=S.total; }
+  renderTimer(); setButtons();
+  $("card").classList.remove("flash"); void $("card").offsetWidth; $("card").classList.add("flash");
+  note(S.deck.length? "" : "That was the last card in the deck.");
+  say("New card: "+titleOf(S.cur)+". "+(S.names.length? "Speaker: "+S.names[(S.turn-1)%S.names.length]+".":""));
+  if(S.timerOn&&$("auto").checked) startTimer();
+}
+function flipCard(){ if(!S.cur) return; S.flipped=!S.flipped; renderCard(); setButtons(); say(S.flipped?"Showing the back of the card.":"Showing the front of the card."); }
+function passCard(){
+  if(!S.cur||!S.deck.length) return;
+  const keep=S.cur.id; stopTimer();
+  const pos=Math.floor(Math.random()*(S.deck.length+1)); S.deck.splice(pos,0,keep);
+  S.drawn--; S.turn--; // a pass does not use the speaker's turn
+  const id=S.deck.pop(); S.cur=CARDS[id]; S.flipped=false; S.drawn++; S.turn++;
+  renderCard(); renderChecks(); updateCounts();
+  S.phase=S.timerOn?"think":"idle"; if(S.timerOn){ S.total=S.dur.think; S.remaining=S.total; }
+  renderTimer(); setButtons(); note("Swapped for a new card."); say("Swapped. New card: "+titleOf(S.cur));
+  if(S.timerOn&&$("auto").checked) startTimer();
+}
+function toggleMuddy(){
+  if(!S.cur) return; const i=S.muddy.indexOf(S.cur.id);
+  if(i>=0) S.muddy.splice(i,1); else S.muddy.push(S.cur.id);
+  renderMuddy(); setButtons();
+}
+function copyMuddy(){
+  const lines=["Muddy cards from our room:"].concat(S.muddy.map((id,i)=>(i+1)+". "+titleOf(CARDS[id])));
+  const text=lines.join("\n"); const out=$("copied");
+  const manual=()=>{ out.textContent="Copying was blocked. Select the list above and copy it manually."; };
+  const fallback=()=>{ try{ const ta=document.createElement("textarea"); ta.value=text; ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); const ok=document.execCommand("copy"); document.body.removeChild(ta); if(ok) out.textContent="Copied. Paste it into the chat or your notes."; else manual(); }catch(e){ manual(); } };
+  try{ if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(()=>{out.textContent="Copied. Paste it into the chat or your notes.";},fallback); else fallback(); }catch(e){ fallback(); }
+}
+
+/* ---------- wiring ---------- */
+$("draw").addEventListener("click",drawCard);
+$("flip").addEventListener("click",flipCard);
+$("pass").addEventListener("click",passCard);
+$("mud").addEventListener("click",toggleMuddy);
+$("pp").addEventListener("click",toggleTimer);
+$("skip").addEventListener("click",nextPhase);
+$("reset").addEventListener("click",restartTimer);
+$("copy").addEventListener("click",copyMuddy);
+$("applySetup").addEventListener("click",applySetup);
+$("preset").addEventListener("change",()=>{ readTimerInputs(); if(!S.timerOn){ stopTimer(); S.phase="idle"; } else if(S.cur&&S.phase==="idle"){ S.phase="think"; S.total=S.dur.think; S.remaining=S.total; } renderTimer(); setButtons(); });
+["tThink","tExplain","tDiscuss"].forEach(id=>$(id).addEventListener("input",()=>{ $("preset").value="custom"; readTimerInputs(); }));
+$("catBoxes").addEventListener("change",()=>{});
+document.addEventListener("keydown",(e)=>{
+  if(e.ctrlKey||e.metaKey||e.altKey) return;
+  const t=e.target; if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+  const k=e.key.toLowerCase();
+  if(k==="d"&&!$("draw").disabled){ drawCard(); }
+  else if(k==="f"&&!$("flip").disabled){ flipCard(); }
+  else if(k==="p"&&!$("pp").disabled){ toggleTimer(); }
+  else if(k==="m"&&!$("mud").disabled){ toggleMuddy(); }
+});
+
+readTimerInputs(); renderMods(); renderCats(); buildDeck(); renderCard(); renderTurn(); renderTimer(); setButtons();
+</script>
+</body>
+</html>
